@@ -4,7 +4,8 @@ const app = express();
 const methodOverride = require('method-override');
 
 // import routes
-const { userRouter } = require('./controllers/user.js')
+const { userRouter } = require('./controllers/user.js');
+const { fandomRouter } = require('./controllers/fandom.js')
 
 // middleware
 app.use(express.urlencoded({extended: true}));
@@ -16,6 +17,7 @@ app.set('view engine', 'hbs');
 
 // set routes
 app.use('/users', userRouter);
+app.use('/fandoms', fandomRouter);
 
 // set port
 const PORT = process.env.PORT || 3000;
