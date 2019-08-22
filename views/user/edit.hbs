@@ -10,3 +10,6 @@
     <input type="text" name="link" value="{{user.link}}" />
     <input type="submit" value="Save Changes" />
 </form>
+<form method="POST" action="/users/{{user._id}}?_method=DELETE">
+    <input type="submit" value="DELETE ACCOUNT" />
+</form>
