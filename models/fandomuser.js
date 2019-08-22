@@ -3,7 +3,7 @@ const FandomApi = require('./fandom.js');
 const UserApi = require('./user.js')
 
 function getFandomsByUserId (userId) {
-    return UserInFandomApi.getUserInFandomsByCriteria({ userId: userId })
+    return userInFandomApi.getUserInFandomsByCriteria({ userId: userId })
     .then(
         userInFandoms => {
             return Promise.all(

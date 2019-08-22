@@ -1,6 +1,7 @@
 const express = require('express');
 
 const userApi = require('../models/user.js');
+const fandomUserApi = require('../models/fandomuser.js');
 
 const userRouter = express.Router();
 
@@ -25,9 +26,14 @@ userRouter.get('/signup', (req, res) => {
 });
 
 userRouter.route('/:userId')
+  //user view requires user's fandoms
   .get( (req, res) => {
     userApi.getUser(req.params.userId).then(
-      user => res.send(user)
+      user => {
+        fandomUserApi.getFandomsByUserId(user._id).then(
+          fandoms => res.render('./user/userProfile.hbs', { user, fandoms } )
+        )
+      }
     ).catch(
       () => res.sendStatus(400)
     );
