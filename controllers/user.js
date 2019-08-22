@@ -36,7 +36,7 @@ userRouter.route('/:userId')
     userApi.updateUser(req.params.userId, req.body).then(
       () => res.sendStatus(200)
     ).catch(
-      err => res.sendStatus(400)
+      () => res.sendStatus(400)
     );
   })
   .delete( (req, res) => {
@@ -46,6 +46,12 @@ userRouter.route('/:userId')
       () => res.sendStatus(400)
     )
   });
+
+userRouter.get('/:userId/edit', (req, res) => {
+  userApi.getUser(req.params.userId).then(
+    user => res.render('./user/edit.hbs', { user })
+  )
+});
 
 module.exports = {
   userRouter

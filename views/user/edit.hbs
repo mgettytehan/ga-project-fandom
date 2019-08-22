@@ -1,0 +1,12 @@
+<h2>{{user.username}}</h2>
+<form method="POST" action="/users/{{user._id}}?_method=PUT">
+    <label for="username">Username:</label>
+    <input type="text" name="username" value="{{user.username}}" />
+    <label for="bio">Bio:</label>
+    <textarea name="bio">
+        {{user.bio}}
+    </textarea>
+    <label for="link">Link:</label>
+    <input type="text" name="link" value="{{user.link}}" />
+    <input type="submit" value="Save Changes" />
+</form>
