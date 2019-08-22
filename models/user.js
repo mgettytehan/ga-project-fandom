@@ -3,6 +3,7 @@ const mongoose = require('./connection.js');
 const UserSchema = new mongoose.Schema({
   username: String,
   bio: String,
+  joinDate: Date,
   link: String
 });
 
