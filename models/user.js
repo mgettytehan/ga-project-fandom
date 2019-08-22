@@ -18,6 +18,7 @@ function getUser(userId) {
 }
 
 function addUser(newUser) {
+  newUser.joinDate = new Date();
   return UserCollection.insertMany(newUser);
 }
 
