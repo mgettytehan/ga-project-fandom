@@ -20,6 +20,10 @@ userRouter.route('/')
     );
   });
 
+userRouter.get('/signup', (req, res) => {
+  res.render('./user/signUp');
+});
+
 userRouter.route('/:userId')
   .get( (req, res) => {
     userApi.getUser(req.params.userId).then(
