@@ -1,7 +1,7 @@
 const express = require('express');
 
-const fandomApi = require('../models/fandom.js');
-const fandomUserApi = require('../models/fandomuser.js');
+const fandomApi = require('../models/db-fandom.js');
+const fandomModelApi = require('../models/fandommodel.js');
 
 const fandomRouter = express.Router();
 
@@ -26,7 +26,7 @@ fandomRouter.route('/:fandomId')
   .get( (req, res) => {
     fandomApi.getFandom(req.params.fandomId).then(
       fandom => {
-        fandomUserApi.getUsersByFandomId(fandom._id).then(
+        fandomModelApi.getUsersByFandomId(fandom._id).then(
           users => res.render('./fandom/fandomProfile', { fandom, users } )
         )
       }

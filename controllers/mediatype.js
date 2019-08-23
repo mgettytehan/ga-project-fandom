@@ -1,6 +1,6 @@
 const express = require('express');
 
-const mediaTypeApi = require('../models/mediatype.js');
+const mediaTypeApi = require('../models/db-mediatype.js');
 
 const mediaTypeRouter = express.Router();
 
