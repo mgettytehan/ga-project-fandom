@@ -1,0 +1,19 @@
+<div>
+    <h2>Add New</h2>
+    <form method="POST" action="/mediatypes">
+    <input type="text" name="typeName" />
+    <input type="submit" value="Create">
+    </form>
+</div>
+<div>
+    <h2>Edit Existing</h2>
+    {{#each mediaTypes}}
+    <form method="POST" action="/mediatypes/{{_id}}?_method=PUT">
+    <input type="text" name="mediaName" value="{{typeName}}"/>
+    <input type="submit" value="Edit" />
+    </form>
+    <form method="POST" action="/mediatypes/{{_id}}?_method=DELETE">
+    <input type="submit" value="Delete" />
+    </form>
+    {{/each}}
+</div>

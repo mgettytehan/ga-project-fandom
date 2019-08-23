@@ -6,7 +6,8 @@ const methodOverride = require('method-override');
 // import routes
 const { userRouter } = require('./controllers/user.js');
 const { fandomRouter } = require('./controllers/fandom.js');
-const { mainRouter } = require('./controllers/main.js')
+const { mediaTypeRouter } = require('./controllers/mediatype.js')
+const { mainRouter } = require('./controllers/main.js');
 
 // middleware
 app.use(express.urlencoded({extended: true}));
@@ -19,6 +20,7 @@ app.set('view engine', 'hbs');
 // set routes
 app.use('/users', userRouter);
 app.use('/fandoms', fandomRouter);
+app.use('/mediatypes', mediaTypeRouter)
 app.use('/', mainRouter);
 
 // set port

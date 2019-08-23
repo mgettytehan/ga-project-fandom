@@ -1,7 +1,7 @@
 const mongoose = require('./connection.js');
 
 const MediaTypeSchema = new mongoose.Schema({
-  typename: String
+  typeName: String
 });
 
 const MediaTypeCollection = mongoose.model('MediaType', MediaTypeSchema);
