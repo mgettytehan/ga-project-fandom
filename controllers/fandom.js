@@ -24,12 +24,8 @@ fandomRouter.route('/')
 fandomRouter.route('/:fandomId')
   //fandom view requires users belonging to fandom
   .get( (req, res) => {
-    fandomApi.getFandom(req.params.fandomId).then(
-      fandom => {
-        fandomModelApi.getUsersByFandomId(fandom._id).then(
-          users => res.render('./fandom/fandomProfile', { fandom, users } )
-        )
-      }
+    fandomModelApi.getAllFandomData(req.params.fandomId).then(
+      allFandomData => res.render('./fandom/fandomProfile', allFandomData )
     ).catch(
       () => res.sendStatus(400)
     );
