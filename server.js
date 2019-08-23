@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 const methodOverride = require('method-override');
+const hbs = require('./hbshelpers/hhelpers.js')
 
 // import routes
 const { userRouter } = require('./controllers/user.js');

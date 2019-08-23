@@ -11,6 +11,18 @@ async function getAllFandomData (fandomId) {
     return { fandom, users, mediaType };
 }
 
+async function getFandomAndMediaTypes (fandomId) {
+    const fandom = await fandomDbApi.getFandom(fandomId);
+    const mediaTypes = await mediaTypeDbApi.getAllMediaTypes();
+    return { fandom, mediaTypes };
+}
+
+async function getFandomsAndMediaTypes () {
+    const fandoms = await fandomDbApi.getAllFandoms();
+    const mediaTypes = await mediaTypeDbApi.getAllMediaTypes();
+    return { fandoms, mediaTypes };
+}
+
 async function getUsersByFandomId (fandomId) {
     return userInFandomDbApi.getUserInFandomsByCriteria({ fandomId })
     .then(
@@ -27,5 +39,7 @@ async function getMediaTypeByFandom (fandom) {
 }
 
 module.exports = {
-    getAllFandomData
+    getAllFandomData,
+    getFandomAndMediaTypes,
+    getFandomsAndMediaTypes
 }

@@ -1,0 +1,15 @@
+<div><h2>Edit {{fandom.mediaName}}</h2>
+<form method="POST" action="/fandoms/{{fandom._id}}?_method=PUT">
+<label for="mediaName">Fandom Name:</label>
+<input type="text" name="mediaName" value="{{fandom.mediaName}}">
+<select name="mediaTypeId">
+    {{#each mediaTypes}}
+    <option value="{{_id}}" {{selectedValue _id fandom.mediaTypeId}}>{{typeName}}</option>
+    {{/each}}
+</select>
+<input type="submit" value="Save Changes"/>
+</form>
+<form method="POST" action="/fandoms/{{fandom._id}}?_method=DELETE">
+<input type="submit" value="Delete" />
+</form>
+</div>

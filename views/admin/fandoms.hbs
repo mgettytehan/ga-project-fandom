@@ -1,4 +1,19 @@
 <div>
+    <h2>Create New</h2>
+    <form method="POST" action="/fandoms">
+    <label for="mediaName">Fandom name:</label>
+    <input type="text" name="mediaName" />
+    <label for="mediaType">Media Type:</label>
+    <select name="mediaTypeId">
+        {{#each mediaTypes}}
+        <option value="{{_id}}">{{typeName}}</option>
+        {{/each}}
+    </select>
+    <input type="submit" value="Create New" />
+    </form>
+</div>
+<div>
+    <h2>Edit Existing</h2>
     {{#each fandoms}}
     <p><a href="/fandoms/{{_id}}/edit">{{mediaName}}</a></p>
     {{/each}}

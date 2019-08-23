@@ -21,6 +21,14 @@ fandomRouter.route('/')
     );
   });
 
+fandomRouter.get('/admin', (req, res) => {
+  fandomModelApi.getFandomsAndMediaTypes().then(
+    fandomsAndMedia => res.render('./admin/fandoms.hbs', fandomsAndMedia)
+  ).catch(
+    () => res.sendStatus(400)
+  );
+});
+
 fandomRouter.route('/:fandomId')
   //fandom view requires users belonging to fandom
   .get( (req, res) => {
@@ -46,8 +54,8 @@ fandomRouter.route('/:fandomId')
   });
 
 fandomRouter.get('/:fandomId/edit', (req, res) => {
-  fandomApi.getFandom(req.params.fandomId).then(
-    fandom => res.send(fandom)
+  fandomModelApi.getFandomAndMediaTypes(req.params.fandomId).then(
+    fandomAndMedia => res.render('./admin/fandomEdit.hbs', fandomAndMedia)
   )
 });
 
