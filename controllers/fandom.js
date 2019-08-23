@@ -27,7 +27,7 @@ fandomRouter.route('/:fandomId')
     fandomApi.getFandom(req.params.fandomId).then(
       fandom => {
         fandomUserApi.getUsersByFandomId(fandom._id).then(
-          users => res.send( { fandom, users } )
+          users => res.render('./fandom/fandomProfile', { fandom, users } )
         )
       }
     ).catch(
