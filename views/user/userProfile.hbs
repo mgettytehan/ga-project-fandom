@@ -1,8 +1,12 @@
 <h2>{{user.username}}</h2>
-<p>Join date: {{user.joinDate}}</p>
+<p>Join date: {{displayDate user.joinDate}}</p>
 <div>
     <h3>Fandom List</h3>
-    {{#each fandoms}}
-    <p><a href="/fandoms/{{_id}}">{{mediaName}}</a></p>
-    {{/each}}
+    {{#if fandoms.length}}
+        {{#each fandoms}}
+        <p><a href="/fandoms/{{_id}}">{{mediaName}}</a></p>
+        {{/each}}
+    {{else}}
+        <p>No fandoms listed</p>
+    {{/if}}
 </div>
