@@ -1,17 +1,17 @@
 <div>
     {{!-- fill in route when made --}}
     <h2>Add Fandoms</h2>
-    <form>
+    <form method="POST" action="/users/{{userId}}/editFandoms">
         <fieldset>
         {{#each notUserFandoms}}
-        <input type="checkbox" name="fandom" value="{{_id}}"/><label>{{mediaName}}</label>
+        <input type="checkbox" name="fandoms" value="{{_id}}"/><label>{{mediaName}}</label>
         {{/each}}
         </fieldset>
         <input type="submit" value="Add" />
     </form>
     <h2>Remove Fandoms</h2>
-    <form>
-        <select multiple>
+    <form method="POST" action="/users/{{userId}}/editFandoms?_method=DELETE">
+        <select name="fandoms" multiple>
         {{#each userFandoms}}
         <option value="{{_id}}">{{mediaName}}</option>
         {{/each}}

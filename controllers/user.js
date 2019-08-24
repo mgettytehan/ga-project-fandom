@@ -59,13 +59,24 @@ userRouter.get('/:userId/edit', (req, res) => {
   )
 });
 
-userRouter.get('/:userId/editFandoms', (req, res) => {
-  userModelApi.getFandomsInAndNotIn(req.params.userId).then(
-    fandomCollection => {
-      res.render('./user/addFandoms.hbs', fandomCollection);
-    }
-  )
-});
+userRouter.route('/:userId/editFandoms')
+  .get((req, res) => {
+    userModelApi.getFandomsInAndNotIn(req.params.userId).then(
+      fandomCollection => {
+        res.render('./user/addFandoms.hbs', fandomCollection);
+      }
+    )
+  })
+  .post((req, res) => {
+    userModelApi.addFandomsToUser(req.params.userId, req.body).then(
+      () => res.redirect(`/users/${req.params.userId}`)
+    )
+  })
+  .delete((req, res) => {
+    userModelApi.removeFandomsFromUser(req.params.userId, req.body).then(
+      () => res.redirect(`/users/${req.params.userId}`)
+    )
+  });
 
 module.exports = {
   userRouter

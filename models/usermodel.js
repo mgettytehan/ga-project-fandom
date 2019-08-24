@@ -11,13 +11,26 @@ function getFandomsByUserId (userId) {
         }
     )
 }
+
+function getIdsFromForm(formData) {
+    if (typeof formData.fandoms === Array) {
+        return formData.fandoms;
+    } else {
+        console.log([formData.fandoms]);
+        return [formData.fandoms];
+    }
+}
+
 //expect array of fandom Ids to add and to remove
-async function addFandomsToUser (userId, fandomIds) {
-    const newFandoms = fandomIds.map(fandomId => { fandomId, userId });
+async function addFandomsToUser (userId, formData) {
+    const newFandoms = getIdsFromForm(formData).map(
+        fandomId => { return { fandomId, userId } }
+    );
     return await userInFandomDbApi.addUserInFandoms(newFandoms);
 }
 
-async function removeFandomsFromUser (userId, fandomIds) {
+async function removeFandomsFromUser (userId, formData) {
+    const fandomIds = getIdsFromForm(formData);
     return await Promise.all(
         fandomIds.map(fandomId => userInFandomDbApi.deleteUserInFandoms({ userId, fandomId })
         )
@@ -31,7 +44,7 @@ async function getFandomsInAndNotIn (userId) {
     const notUserFandoms = allFandoms.filter(fandom => {
         return !(userFandomIds.includes(String(fandom._id)));
     });
-    return { userFandoms, notUserFandoms };
+    return { userId, userFandoms, notUserFandoms };
 }
 
 module.exports = {
