@@ -8,7 +8,7 @@ const fandomRouter = express.Router();
 fandomRouter.route('/')
   .get( (req, res) => {
     fandomApi.getAllFandoms().then(
-      fandoms => res.send(fandoms)
+      fandoms => res.render('./fandom/fandomList', { fandoms })
     ).catch(
       () => res.sendStatus(400)
     );
