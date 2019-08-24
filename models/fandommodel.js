@@ -24,7 +24,7 @@ async function getFandomsAndMediaTypes () {
 }
 
 async function getUsersByFandomId (fandomId) {
-    return userInFandomDbApi.getUserInFandomsByCriteria({ fandomId })
+    return userInFandomDbApi.getUserInFandoms({ fandomId })
     .then(
         userInFandoms => {
             return Promise.all(

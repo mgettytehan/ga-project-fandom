@@ -2,7 +2,7 @@ const fandomDbApi = require('./db-fandom');
 const userInFandomDbApi = require('./db-userinfandom');
 
 function getFandomsByUserId (userId) {
-    return userInFandomDbApi.getUserInFandomsByCriteria({ userId })
+    return userInFandomDbApi.getUserInFandoms({ userId })
     .then(
         userInFandoms => {
             return Promise.all(
@@ -11,7 +11,21 @@ function getFandomsByUserId (userId) {
         }
     )
 }
+//expect array of fandom Ids to add and to remove
+async function addFandomsToUser (userId, fandomIds) {
+    const newFandoms = fandomIds.map(fandomId => { fandomId, userId });
+    return await userInFandomDbApi.addUserInFandoms(newFandoms);
+}
+
+async function removeFandomsFromUser (userId, fandomIds) {
+    return await Promise.all(
+        fandomIds.map(fandomId => userInFandomDbApi.deleteUserInFandoms({ userId, fandomId })
+        )
+    )
+}
 
 module.exports = {
-    getFandomsByUserId
+    addFandomsToUser,
+    getFandomsByUserId,
+    removeFandomsFromUser
 }

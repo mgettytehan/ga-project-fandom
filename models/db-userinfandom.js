@@ -11,11 +11,8 @@ function getAllUserInFandoms() {
   return UserInFandomCollection.find();
 }
 
-function getUserInFandom(userInFandomId) {
-  return UserInFandomCollection.findById(userInFandomId);
-}
 //get by fandomId or userId
-function getUserInFandomsByCriteria(criteria) {
+function getUserInFandoms(criteria) {
   return UserInFandomCollection.find(criteria);
 }
 
@@ -23,9 +20,9 @@ function getUserInFandomsByCriteria(criteria) {
 function addUserInFandoms(newUserInFandoms) {
   return UserInFandomCollection.insertMany(newUserInFandoms);
 }
-
-function deleteUserInFandom(userInFandomId) {
-  return UserInFandomCollection.findByIdAndDelete(userInFandomId);
+//provide fandom id, user id
+function deleteUserInFandoms(criteria) {
+  return UserInFandomCollection.deleteMany(criteria);
 }
 
 // To be implemented when active flag is added. Should not otherwise be updatable.
@@ -36,8 +33,7 @@ function deleteUserInFandom(userInFandomId) {
 
 module.exports = {
   addUserInFandoms,
-  deleteUserInFandom,
+  deleteUserInFandoms,
   getAllUserInFandoms,
-  getUserInFandom,
-  getUserInFandomsByCriteria
+  getUserInFandoms
 }
