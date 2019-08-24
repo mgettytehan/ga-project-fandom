@@ -16,13 +16,13 @@ function getIdsFromForm(formData) {
     if (typeof formData.fandoms === Array) {
         return formData.fandoms;
     } else {
-        console.log([formData.fandoms]);
         return [formData.fandoms];
     }
 }
 
 //expect array of fandom Ids to add and to remove
 async function addFandomsToUser (userId, formData) {
+    console.log(formData)
     const newFandoms = getIdsFromForm(formData).map(
         fandomId => { return { fandomId, userId } }
     );
@@ -38,12 +38,19 @@ async function removeFandomsFromUser (userId, formData) {
 }
 //to rework
 async function getFandomsInAndNotIn (userId) {
-    const userFandoms = await getFandomsByUserId(userId);
-    const userFandomIds = userFandoms.map(userFandom => String(userFandom._id));
     const allFandoms = await fandomDbApi.getAllFandoms();
-    const notUserFandoms = allFandoms.filter(fandom => {
-        return !(userFandomIds.includes(String(fandom._id)));
-    });
+    const userFandoms = await getFandomsByUserId(userId);
+    let notUserFandoms;
+    try{
+        const userFandomIds = userFandoms.map(userFandom => String(userFandom._id));
+        notUserFandoms = allFandoms.filter(fandom => {
+            return !(userFandomIds.includes(String(fandom._id)));
+        });
+    }
+    catch(err) {
+        console.log('User had no fandoms');
+        notUserFandoms = allFandoms;
+    }
     return { userId, userFandoms, notUserFandoms };
 }
 
