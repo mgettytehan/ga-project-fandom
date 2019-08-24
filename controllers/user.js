@@ -59,6 +59,14 @@ userRouter.get('/:userId/edit', (req, res) => {
   )
 });
 
+userRouter.get('/:userId/editFandoms', (req, res) => {
+  userModelApi.getFandomsInAndNotIn(req.params.userId).then(
+    fandomCollection => {
+      res.render('./user/addFandoms.hbs', fandomCollection);
+    }
+  )
+});
+
 module.exports = {
   userRouter
 };

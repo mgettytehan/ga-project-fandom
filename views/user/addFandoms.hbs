@@ -1,7 +1,21 @@
 <div>
     {{!-- fill in route when made --}}
     <h2>Add Fandoms</h2>
-
+    <form>
+        <fieldset>
+        {{#each notUserFandoms}}
+        <input type="checkbox" name="fandom" value="{{_id}}"/><label>{{mediaName}}</label>
+        {{/each}}
+        </fieldset>
+        <input type="submit" value="Add" />
+    </form>
     <h2>Remove Fandoms</h2>
-    
+    <form>
+        <select multiple>
+        {{#each userFandoms}}
+        <option value="{{_id}}">{{mediaName}}</option>
+        {{/each}}
+        </select>
+        <input type="submit" value="Remove" />
+    </form>
 </div>

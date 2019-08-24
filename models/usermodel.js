@@ -21,11 +21,22 @@ async function removeFandomsFromUser (userId, fandomIds) {
     return await Promise.all(
         fandomIds.map(fandomId => userInFandomDbApi.deleteUserInFandoms({ userId, fandomId })
         )
-    )
+    );
+}
+//to rework
+async function getFandomsInAndNotIn (userId) {
+    const userFandoms = await getFandomsByUserId(userId);
+    const userFandomIds = userFandoms.map(userFandom => String(userFandom._id));
+    const allFandoms = await fandomDbApi.getAllFandoms();
+    const notUserFandoms = allFandoms.filter(fandom => {
+        return !(userFandomIds.includes(String(fandom._id)));
+    });
+    return { userFandoms, notUserFandoms };
 }
 
 module.exports = {
     addFandomsToUser,
     getFandomsByUserId,
+    getFandomsInAndNotIn,
     removeFandomsFromUser
 }
