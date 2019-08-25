@@ -15,7 +15,7 @@ userRouter.route('/')
   })
   .post( (req, res) => {
     userApi.addDocs(req.body).then(
-      () => res.sendStatus(201)
+      () => res.redirect('/')
     ).catch(
       () => res.sendStatus(400)
     );
@@ -40,14 +40,14 @@ userRouter.route('/:userId')
   })
   .put( (req, res) => {
     userApi.updateDoc(req.params.userId, req.body).then(
-      () => res.sendStatus(200)
+      () => res.redirect(`/users/${req.params.userId}`)
     ).catch(
       () => res.sendStatus(400)
     );
   })
   .delete( (req, res) => {
     userApi.deleteDoc(req.params.userId).then(
-      () => res.sendStatus(200)
+      () => res.redirect('/')
     ).catch(
       () => res.sendStatus(400)
     )

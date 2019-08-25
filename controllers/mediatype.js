@@ -14,7 +14,7 @@ mediaTypeRouter.route('/')
   })
   .post( (req, res) => {
     mediaTypeApi.addDocs(req.body).then(
-      () => res.sendStatus(201)
+      () => res.redirect('/mediatypes')
     ).catch(
       () => res.sendStatus(400)
     );
@@ -23,14 +23,14 @@ mediaTypeRouter.route('/')
 mediaTypeRouter.route('/:mediaTypeId')
   .put( (req, res) => {
     mediaTypeApi.updateDoc(req.params.mediaTypeId, req.body).then(
-      () => res.sendStatus(200)
+      () => res.redirect('/mediatypes')
     ).catch(
       () => res.sendStatus(400)
     );
   })
   .delete( (req, res) => {
     mediaTypeApi.deleteDoc(req.params.mediaTypeId).then(
-      () => res.sendStatus(200)
+      () => res.redirect('/mediatypes')
     ).catch(
       () => res.sendStatus(400)
     )
