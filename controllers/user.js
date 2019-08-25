@@ -8,7 +8,7 @@ const userRouter = express.Router();
 userRouter.route('/')
   .get( (req, res) => {
     userApi.getAllUsers().then(
-      users => res.send(users)
+      users => res.render('./user/userList.hbs', { users })
     ).catch(
       () => res.sendStatus(400)
     );
