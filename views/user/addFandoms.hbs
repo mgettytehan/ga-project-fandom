@@ -1,6 +1,6 @@
 <div>
-    <section>
-    <h3>Add Fandoms</h3>
+    <section class="section">
+    <h4>Add Fandoms</h4>
     <form method="POST" action="/users/{{userId}}/editFandoms">
     <div>
         {{#each notUserFandoms}}
@@ -15,8 +15,9 @@
     <div><input type="submit" value="Add" class="btn" /></div>
     </form>
     </section>
-    <section>
-    <h3>Remove Fandoms</h3>
+    <div class="divider"></div>
+    <section class="section">
+    <h4>Remove Fandoms</h4>
     <form method="POST" action="/users/{{userId}}/editFandoms?_method=DELETE">
         <div class="input-field cold s12">
             <select name="fandoms" multiple>

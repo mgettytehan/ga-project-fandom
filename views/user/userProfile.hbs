@@ -1,7 +1,19 @@
+<section class="section">
 <h2>{{user.username}}</h2>
 <p>Join date: {{displayDate user.joinDate}}</p>
-<div>
-    <h3>Fandom List</h3>
+<p><a href="/users/{{user._id}}/edit" class="btn-small">Edit</a></p>
+</section>
+<section class="section">
+<h4>Bio</h4>
+<p>{{#if user.bio}}
+{{user.bio}}
+{{else}}
+{{user.username}} has no bio.
+{{/if}}
+</p>
+</section>
+<section class="section">
+    <h4>Fandoms</h4>
     {{#if fandoms.length}}
         {{#each fandoms}}
         <p><a href="/fandoms/{{_id}}">{{mediaName}}</a></p>
@@ -9,4 +21,4 @@
     {{else}}
         <p>No fandoms listed</p>
     {{/if}}
-</div>
+</section>
