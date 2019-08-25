@@ -1,15 +1,28 @@
-<div><h2>Edit {{fandom.mediaName}}</h2>
+<section class="section">
+<h2>Edit {{fandom.mediaName}}</h2>
 <form method="POST" action="/fandoms/{{fandom._id}}?_method=PUT">
-<label for="mediaName">Fandom Name:</label>
-<input type="text" name="mediaName" value="{{fandom.mediaName}}">
-<select name="mediaTypeId">
-    {{#each mediaTypes}}
-    <option value="{{_id}}" {{selectedValue _id fandom.mediaTypeId}}>{{typeName}}</option>
-    {{/each}}
-</select>
-<input type="submit" value="Save Changes"/>
-</form>
-<form method="POST" action="/fandoms/{{fandom._id}}?_method=DELETE">
-<input type="submit" value="Delete" />
-</form>
+<div class="input-field">
+    <label for="mediaName">Fandom Name:</label>
+    <input type="text" name="mediaName" value="{{fandom.mediaName}}">
 </div>
+<div class="input-field">
+    {{!-- to fix - materialize style affects --}}
+    <label for="mediaTypeId">Media type:</label>
+    <select name="mediaTypeId">
+        {{#each mediaTypes}}
+        <option value="{{_id}}" {{selectedValue _id fandom.mediaTypeId}}>{{typeName}}</option>
+        {{/each}}
+    </select>
+</div>
+<div class="input-field">
+    <input type="submit" value="Save Changes" class="btn"/>
+</div>
+</form>
+</section>
+<div class="divider"></div>
+<section class="section">
+<p>Warning! Please delete with care.</p>
+<form method="POST" action="/fandoms/{{fandom._id}}?_method=DELETE">
+<input type="submit" value="Delete" class="btn red accent-4"/>
+</form>
+</section>

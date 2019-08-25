@@ -1,8 +1,15 @@
-<h2>{{fandom.mediaName}}</h2>
+<section class="section"><h2>{{fandom.mediaName}}</h2>
 {{!-- media type functionality not implemented yet --}}
-<h3>{{mediaType.typeName}}</h3>
-<div>
+<h4>{{mediaType.typeName}}</h4>
+</section>
+<div class="divider"></div>
+<section class="section">
+    <h4>Fans</h4>
+    {{#if users}}
     {{#each users}}
     <p><a href="/users/{{_id}}">{{username}}</a></p>
     {{/each}}
-</div>
+    {{else}}
+    <p>This fandom has no listed fans. :(</p>
+    {{/if}}
+</section>

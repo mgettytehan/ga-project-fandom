@@ -1,19 +1,30 @@
-<div>
-    <h2>Add New</h2>
+<section class="section">
+    <h3>Add New Media Type</h3>
     <form method="POST" action="/mediatypes">
-    <input type="text" name="typeName" />
-    <input type="submit" value="Create">
+    <div class="input-field">
+        <input type="text" name="typeName" />
+    </div>
+    <div class="input-field">
+        <input type="submit" value="Create" class="btn">
+    </div>
     </form>
-</div>
-<div>
+</section>
+<div class="divider"></div>
+<section class="section">
     <h2>Edit Existing</h2>
     {{#each mediaTypes}}
     <form method="POST" action="/mediatypes/{{_id}}?_method=PUT">
-    <input type="text" name="mediaName" value="{{typeName}}"/>
-    <input type="submit" value="Edit" />
+    <div class="input-field">
+        <input type="text" name="mediaName" value="{{typeName}}"/>
+    </div>
+    <div class="input-field">
+        <input type="submit" value="Edit" class="btn"/>
+    </div>
     </form>
     <form method="POST" action="/mediatypes/{{_id}}?_method=DELETE">
-    <input type="submit" value="Delete" />
+    <div class="input-field">
+        <input type="submit" value="Delete" class="btn red accent-4"/>
+    </div>
     </form>
     {{/each}}
-</div>
+</section>
