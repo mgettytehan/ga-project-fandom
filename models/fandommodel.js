@@ -2,6 +2,12 @@ const fandomDbApi = require('./db-fandom.js')
 const userDbApi = require('./db-user');
 const userInFandomDbApi = require('./db-userinfandom');
 const mediaTypeDbApi = require('./db-mediatype.js');
+const generalHelpers = require('./general-helpers.js')
+
+async function getAllFandomsSorted() {
+    const fandomsSorted = await fandomDbApi.getAllFandoms();
+    return generalHelpers.sortAlphabeticallyByProperty(fandomsSorted, 'mediaName');
+}
 
 //to refactor
 async function getAllFandomData (fandomId) {
@@ -24,14 +30,11 @@ async function getFandomsAndMediaTypes () {
 }
 
 async function getUsersByFandomId (fandomId) {
-    return userInFandomDbApi.getUserInFandoms({ fandomId })
-    .then(
-        userInFandoms => {
-            return Promise.all(
-                userInFandoms.map(userInFandom => userDbApi.getUser(userInFandom.userId))
-            )
-        }
+    const relationships = await userInFandomDbApi.getUserInFandoms({ fandomId });
+    const users = await Promise.all(
+        relationships.map(relationship => userDbApi.getUser(relationship.userId))
     )
+    return generalHelpers.sortAlphabeticallyByProperty(users, 'username');
 }
 
 async function getMediaTypeByFandom (fandom) {
@@ -40,6 +43,7 @@ async function getMediaTypeByFandom (fandom) {
 
 module.exports = {
     getAllFandomData,
+    getAllFandomsSorted,
     getFandomAndMediaTypes,
     getFandomsAndMediaTypes
 }

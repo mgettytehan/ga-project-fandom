@@ -1,22 +1,21 @@
 const fandomDbApi = require('./db-fandom');
 const userInFandomDbApi = require('./db-userinfandom');
+const generalHelpers = require('./general-helpers.js');
 
-function getFandomsByUserId (userId) {
-    return userInFandomDbApi.getUserInFandoms({ userId })
-    .then(
-        userInFandoms => {
-            return Promise.all(
-                userInFandoms.map(userInFandom => fandomDbApi.getFandom(userInFandom.fandomId))
-            )
-        }
-    )
+async function getFandomsByUserId (userId) {
+    const relationships = await userInFandomDbApi.getUserInFandoms({ userId });
+    const fandoms = await Promise.all(
+        relationships.map(relationship => fandomDbApi.getFandom(relationship.fandomId))
+    );
+    return generalHelpers.sortAlphabeticallyByProperty(fandoms, 'mediaName'); 
 }
 
 function getIdsFromForm(formData) {
-    if (typeof formData.fandoms === Array) {
-        return formData.fandoms;
-    } else {
+    console.log(typeof formData.fandoms)
+    if (typeof formData.fandoms === 'string') {
         return [formData.fandoms];
+    } else {
+        return formData.fandoms;
     }
 }
 
@@ -38,7 +37,7 @@ async function removeFandomsFromUser (userId, formData) {
 }
 //to rework
 async function getFandomsInAndNotIn (userId) {
-    const allFandoms = await fandomDbApi.getAllFandoms();
+    const allFandoms = generalHelpers.sortAlphabeticallyByProperty(await fandomDbApi.getAllFandoms(), 'mediaName');
     const userFandoms = await getFandomsByUserId(userId);
     let notUserFandoms;
     try{
