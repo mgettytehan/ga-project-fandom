@@ -1,7 +1,7 @@
 const { fandomApi } = require('./db-fandom.js')
 const userDbApi = require('./db-user');
 const userInFandomDbApi = require('./db-userinfandom');
-const mediaTypeDbApi = require('./db-mediatype.js');
+const { mediaTypeApi } = require('./db-mediatype.js');
 const generalHelpers = require('./general-helpers.js')
 
 async function getAllFandomsSorted() {
@@ -19,13 +19,13 @@ async function getAllFandomData (fandomId) {
 
 async function getFandomAndMediaTypes (fandomId) {
     const fandom = await fandomApi.getById(fandomId);
-    const mediaTypes = await mediaTypeDbApi.getAllMediaTypes();
+    const mediaTypes = await mediaTypeApi.getAll();
     return { fandom, mediaTypes };
 }
 
 async function getFandomsAndMediaTypes () {
     const fandoms = await fandomApi.getAll();
-    const mediaTypes = await mediaTypeDbApi.getAllMediaTypes();
+    const mediaTypes = await mediaTypeApi.getAll();
     return { fandoms, mediaTypes };
 }
 
@@ -38,7 +38,7 @@ async function getUsersByFandomId (fandomId) {
 }
 
 async function getMediaTypeByFandom (fandom) {
-    return mediaTypeDbApi.getMediaType(fandom.mediaTypeId)
+    return mediaTypeApi.getById(fandom.mediaTypeId);
 }
 
 module.exports = {
