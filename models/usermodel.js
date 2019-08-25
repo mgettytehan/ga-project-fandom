@@ -1,9 +1,9 @@
 const { fandomApi } = require('./db-fandom');
-const userInFandomDbApi = require('./db-userinfandom');
+const { userInFandomApi } = require('./db-userinfandom');
 const generalHelpers = require('./general-helpers.js');
 
 async function getFandomsByUserId (userId) {
-    const relationships = await userInFandomDbApi.getUserInFandoms({ userId });
+    const relationships = await userInFandomApi.getByCriteria({ userId });
     const fandoms = await Promise.all(
         relationships.map(relationship => fandomApi.getById(relationship.fandomId))
     );
@@ -21,17 +21,16 @@ function getIdsFromForm(formData) {
 
 //expect array of fandom Ids to add and to remove
 async function addFandomsToUser (userId, formData) {
-    console.log(formData)
     const newFandoms = getIdsFromForm(formData).map(
         fandomId => { return { fandomId, userId } }
     );
-    return await userInFandomDbApi.addDocs(newFandoms);
+    return await userInFandomApi.addDocs(newFandoms);
 }
 
 async function removeFandomsFromUser (userId, formData) {
     const fandomIds = getIdsFromForm(formData);
     return await Promise.all(
-        fandomIds.map(fandomId => userInFandomDbApi.deleteUserInFandoms({ userId, fandomId })
+        fandomIds.map(fandomId => userInFandomApi.deleteDocs({ userId, fandomId })
         )
     );
 }

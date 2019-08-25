@@ -1,20 +1,20 @@
 const express = require('express');
 
-const userApi = require('../models/db-user.js');
+const { userApi } = require('../models/db-user.js');
 const userModelApi = require('../models/usermodel.js');
 
 const userRouter = express.Router();
 
 userRouter.route('/')
   .get( (req, res) => {
-    userApi.getAllUsers().then(
+    userApi.getAll().then(
       users => res.render('./user/userList.hbs', { users })
     ).catch(
       () => res.sendStatus(400)
     );
   })
   .post( (req, res) => {
-    userApi.addUser(req.body).then(
+    userApi.addDocs(req.body).then(
       () => res.sendStatus(201)
     ).catch(
       () => res.sendStatus(400)
@@ -28,7 +28,7 @@ userRouter.get('/signup', (req, res) => {
 userRouter.route('/:userId')
   //user view requires user's fandoms
   .get( (req, res) => {
-    userApi.getUser(req.params.userId).then(
+    userApi.getById(req.params.userId).then(
       user => {
         userModelApi.getFandomsByUserId(user._id).then(
           fandoms => res.render('./user/userProfile.hbs', { user, fandoms } )
@@ -39,14 +39,14 @@ userRouter.route('/:userId')
     );
   })
   .put( (req, res) => {
-    userApi.updateUser(req.params.userId, req.body).then(
+    userApi.updateDoc(req.params.userId, req.body).then(
       () => res.sendStatus(200)
     ).catch(
       () => res.sendStatus(400)
     );
   })
   .delete( (req, res) => {
-    userApi.deleteUser(req.params.userId).then(
+    userApi.deleteDoc(req.params.userId).then(
       () => res.sendStatus(200)
     ).catch(
       () => res.sendStatus(400)
@@ -54,7 +54,7 @@ userRouter.route('/:userId')
   });
 
 userRouter.get('/:userId/edit', (req, res) => {
-  userApi.getUser(req.params.userId).then(
+  userApi.getById(req.params.userId).then(
     user => res.render('./user/edit.hbs', { user })
   )
 });

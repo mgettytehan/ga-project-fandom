@@ -1,6 +1,6 @@
 const { fandomApi } = require('./db-fandom.js')
-const userDbApi = require('./db-user');
-const userInFandomDbApi = require('./db-userinfandom');
+const { userApi } = require('./db-user');
+const { userInFandomApi } = require('./db-userinfandom');
 const { mediaTypeApi } = require('./db-mediatype.js');
 const generalHelpers = require('./general-helpers.js')
 
@@ -30,9 +30,9 @@ async function getFandomsAndMediaTypes () {
 }
 
 async function getUsersByFandomId (fandomId) {
-    const relationships = await userInFandomDbApi.getUserInFandoms({ fandomId });
+    const relationships = await userInFandomApi.getByCriteria({ fandomId });
     const users = await Promise.all(
-        relationships.map(relationship => userDbApi.getUser(relationship.userId))
+        relationships.map(relationship => userApi.getById(relationship.userId))
     )
     return generalHelpers.sortAlphabeticallyByProperty(users, 'username');
 }
