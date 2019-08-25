@@ -14,12 +14,14 @@
 </section>
 <section class="section">
     <h4>Fandoms</h4>
+    <div class="collection">
     {{#if fandoms.length}}
         {{#each fandoms}}
-        <p><a href="/fandoms/{{_id}}">{{mediaName}}</a></p>
+        <a href="/fandoms/{{_id}}" class="collection-item">{{mediaName}}</a>
         {{/each}}
     {{else}}
         <p>No fandoms listed</p>
     {{/if}}
+    </div>
     <p><a href="/users/{{user._id}}/editfandoms" class="btn-small">Edit</a></p>
 </section>

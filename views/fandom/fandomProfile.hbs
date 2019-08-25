@@ -5,11 +5,13 @@
 <div class="divider"></div>
 <section class="section">
     <h4>Fans</h4>
+    <div class="collection">
     {{#if users}}
     {{#each users}}
-    <p><a href="/users/{{_id}}">{{username}}</a></p>
+    <a href="/users/{{_id}}" class="collection-item">{{username}}</a>
     {{/each}}
     {{else}}
     <p>This fandom has no listed fans. :(</p>
     {{/if}}
+    </div>
 </section>

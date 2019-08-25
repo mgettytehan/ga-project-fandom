@@ -21,7 +21,9 @@
 <div class="divider"></div>
 <section class="section">
     <h3>Edit Existing</h3>
+    <div class="collection">
     {{#each fandoms}}
-    <p><a href="/fandoms/{{_id}}/edit">{{mediaName}}</a></p>
+    <a href="/fandoms/{{_id}}/edit" class="collection-item">{{mediaName}}</a>
     {{/each}}
+    </div>
 </section>
