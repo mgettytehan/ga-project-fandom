@@ -3,7 +3,8 @@
     <form method="POST" action="/users">
         <div class="input-field">
             <label for="username" class="label">Username:</label>
-            <input type="text" name="username" pattern="[A-Za-z0-9-_]{1-25}" required />
+            <input type="text" name="username" pattern="[A-Za-z0-9-_]{1,25}" required />
+            <span class="helper-text" data-error="wrong" data-success="right">Characters allowed: letters, numbers, underscores, hyphens.</span>
         </div>
         <div class="input-field">
             <input type="submit" class="btn" value="Submit" />
