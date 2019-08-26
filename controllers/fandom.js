@@ -8,7 +8,7 @@ const fandomRouter = express.Router();
 fandomRouter.route('/')
   .get( (req, res) => {
     fandomModelApi.getAllFandomsSorted().then(
-      fandoms => res.render('./fandom/fandomList', { fandoms })
+      fandoms => res.render('./fandom/fandomList', { title: 'Fandoms', fandoms })
     )
   })
   .post( (req, res) => {
@@ -21,7 +21,11 @@ fandomRouter.route('/')
 
 fandomRouter.get('/admin', (req, res) => {
   fandomModelApi.getFandomsAndMediaTypes().then(
-    fandomsAndMedia => res.render('./admin/fandoms.hbs', fandomsAndMedia)
+    fandomsAndMedia => {
+      //add page title
+      fandomsAndMedia.title = "Edit Fandoms";
+      res.render('./admin/fandoms.hbs', fandomsAndMedia);
+    }
   ).catch(
     () => res.sendStatus(400)
   );
@@ -31,7 +35,10 @@ fandomRouter.route('/:fandomId')
   //fandom view requires users belonging to fandom
   .get( (req, res) => {
     fandomModelApi.getAllFandomData(req.params.fandomId).then(
-      allFandomData => res.render('./fandom/fandomProfile', allFandomData )
+      allFandomData => {
+        allFandomData.title = allFandomData.fandom.mediaName;
+        res.render('./fandom/fandomProfile', allFandomData );
+    }
     ).catch(
       () => res.sendStatus(400)
     );
@@ -53,7 +60,10 @@ fandomRouter.route('/:fandomId')
 
 fandomRouter.get('/:fandomId/edit', (req, res) => {
   fandomModelApi.getFandomAndMediaTypes(req.params.fandomId).then(
-    fandomAndMedia => res.render('./admin/fandomEdit.hbs', fandomAndMedia)
+    fandomAndMedia => {
+      fandomAndMedia.title = "Edit " + fandomAndMedia.fandom.mediaName;
+      res.render('./admin/fandomEdit.hbs', fandomAndMedia);
+    }
   )
 });
 

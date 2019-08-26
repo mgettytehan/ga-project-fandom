@@ -7,7 +7,7 @@ const mediaTypeRouter = express.Router();
 mediaTypeRouter.route('/')
   .get( (req, res) => {
     mediaTypeApi.getAll().then(
-      mediaTypes => res.render('./admin/mediaTypes', { mediaTypes })
+      mediaTypes => res.render('./admin/mediaTypes', { title: 'Edit Media Types', mediaTypes })
     ).catch(
       () => res.sendStatus(400)
     );
