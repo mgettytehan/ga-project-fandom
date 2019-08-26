@@ -14,7 +14,7 @@ userRouter.route('/')
     );
   })
   .post( (req, res) => {
-    userApi.addDocs(req.body).then(
+    userModelApi.addUserWithDate(req.body).then(
       () => res.redirect('/')
     ).catch(
       () => res.sendStatus(400)

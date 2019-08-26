@@ -1,6 +1,12 @@
 const { fandomApi } = require('./db-fandom');
+const { userApi } = require('./db-user');
 const { userInFandomApi } = require('./db-userinfandom');
 const generalHelpers = require('./general-helpers.js');
+
+async function addUserWithDate(user) {
+    user.joinDate = new Date();
+    return userApi.addDocs(user);
+}
 
 async function getFandomsByUserId (userId) {
     const relationships = await userInFandomApi.getByCriteria({ userId });
@@ -54,6 +60,7 @@ async function getFandomsInAndNotIn (userId) {
 
 module.exports = {
     addFandomsToUser,
+    addUserWithDate,
     getFandomsByUserId,
     getFandomsInAndNotIn,
     removeFandomsFromUser
