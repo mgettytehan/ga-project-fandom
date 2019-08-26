@@ -3,7 +3,7 @@
 <form method="POST" action="/users/{{user._id}}?_method=PUT">
 <div class="input-field">
     <label for="username">Username:</label>
-    <input type="text" name="username" value="{{user.username}}" />
+    <input type="text" name="username" value="{{user.username}}" required />
 </div>
 <div class="input-field">
     <label for="bio">Bio:</label>

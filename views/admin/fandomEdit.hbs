@@ -3,7 +3,7 @@
 <form method="POST" action="/fandoms/{{fandom._id}}?_method=PUT">
 <div class="input-field">
     <label for="mediaName">Fandom Name:</label>
-    <input type="text" name="mediaName" value="{{fandom.mediaName}}">
+    <input type="text" name="mediaName" value="{{fandom.mediaName}}" required />
 </div>
 <div class="input-field">
     {{!-- to fix - materialize style affects --}}
