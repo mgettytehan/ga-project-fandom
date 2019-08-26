@@ -8,7 +8,7 @@ const userRouter = express.Router();
 userRouter.route('/')
   .get( (req, res) => {
     userApi.getAll().then(
-      users => res.render('./user/userList.hbs', { users })
+      users => res.render('./user/userList.hbs', { title: 'Fans', users })
     ).catch(
       () => res.sendStatus(400)
     );
@@ -26,13 +26,11 @@ userRouter.get('/signup', (req, res) => {
 });
 
 userRouter.route('/:userId')
-  //user view requires user's fandoms
   .get( (req, res) => {
-    userApi.getById(req.params.userId).then(
-      user => {
-        userModelApi.getFandomsByUserId(user._id).then(
-          fandoms => res.render('./user/userProfile.hbs', { user, fandoms } )
-        )
+    userModelApi.getUserAndFandoms(req.params.userId).then(
+      userAndFandoms => {
+        userAndFandoms.title = userAndFandoms.user.username;
+        res.render('./user/userProfile.hbs', userAndFandoms);
       }
     ).catch(
       () => res.sendStatus(400)
@@ -55,7 +53,10 @@ userRouter.route('/:userId')
 
 userRouter.get('/:userId/edit', (req, res) => {
   userApi.getById(req.params.userId).then(
-    user => res.render('./user/edit.hbs', { user })
+    user => {
+      const title = 'Edit ' + user.username;
+      res.render('./user/edit.hbs', { title, user });
+    }
   )
 });
 
@@ -63,6 +64,7 @@ userRouter.route('/:userId/editFandoms')
   .get((req, res) => {
     userModelApi.getFandomsInAndNotIn(req.params.userId).then(
       fandomCollection => {
+        fandomCollection.title = 'Edit Fandoms';
         res.render('./user/addFandoms.hbs', fandomCollection);
       }
     )

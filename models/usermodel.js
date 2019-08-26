@@ -16,6 +16,12 @@ async function getFandomsByUserId (userId) {
     return generalHelpers.sortAlphabeticallyByProperty(fandoms, 'mediaName'); 
 }
 
+async function getUserAndFandoms(userId) {
+    const user = await userApi.getById(userId);
+    const fandoms = await getFandomsByUserId(userId);
+    return { user, fandoms };
+}
+
 function getIdsFromForm(formData) {
     console.log(typeof formData.fandoms)
     if (typeof formData.fandoms === 'string') {
@@ -63,5 +69,6 @@ module.exports = {
     addUserWithDate,
     getFandomsByUserId,
     getFandomsInAndNotIn,
+    getUserAndFandoms,
     removeFandomsFromUser
 }
