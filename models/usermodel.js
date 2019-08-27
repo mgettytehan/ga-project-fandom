@@ -77,10 +77,21 @@ async function getFandomsInAndNotIn (userId) {
     }
     return { userId, userFandoms, notUserFandoms };
 }
+//delete relationships associated with user
+async function deleteUser(userId) {
+    await Promise.all(userInFandomApi.deleteDocs({userId}), userSiteApi.deleteDocs({userId})).catch(
+        err => {
+            console.log(err);
+            return;
+        }
+    );
+    return await userApi.deleteDoc(userId);
+}
 
 module.exports = {
     addFandomsToUser,
     addUserWithDate,
+    deleteUser,
     getAllUserData,
     getFandomsByUserId,
     getFandomsInAndNotIn,
