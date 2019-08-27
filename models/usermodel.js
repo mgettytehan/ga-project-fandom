@@ -1,6 +1,8 @@
 const { fandomApi } = require('./db-fandom');
 const { userApi } = require('./db-user');
 const { userInFandomApi } = require('./db-userinfandom');
+const { siteLinkApi } = require('./db-sitelink.js');
+const { userSiteApi } = require('./db-usersite.js');
 const generalHelpers = require('./general-helpers.js');
 
 async function addUserWithDate(user) {
@@ -16,10 +18,22 @@ async function getFandomsByUserId (userId) {
     return generalHelpers.sortAlphabeticallyByProperty(fandoms, 'mediaName'); 
 }
 
-async function getUserAndFandoms(userId) {
+async function getLinksByUserId (userId) {
+    const linksList = await userSiteApi.getByCriteria({ userId });
+    const linksWithTypeName = await Promise.all(
+        linksList.map(link => {
+            link.siteName = siteLinkApi.getById(linksList.siteLinkId);
+            return link;
+        })
+    );
+    return linksWithTypeName;
+}
+
+async function getAllUserData(userId) {
     const user = await userApi.getById(userId);
     const fandoms = await getFandomsByUserId(userId);
-    return { user, fandoms };
+    const links = await getLinksByUserId(userId);
+    return { user, fandoms, links };
 }
 
 function getIdsFromForm(formData) {
@@ -67,8 +81,8 @@ async function getFandomsInAndNotIn (userId) {
 module.exports = {
     addFandomsToUser,
     addUserWithDate,
+    getAllUserData,
     getFandomsByUserId,
     getFandomsInAndNotIn,
-    getUserAndFandoms,
     removeFandomsFromUser
 }
