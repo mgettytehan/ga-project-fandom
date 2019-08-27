@@ -20,3 +20,7 @@ https://fierce-garden-12875.herokuapp.com/
 ![Wireframe of main page, user page and fandom page](https://github.com/mgettytehan/ga-project-fandom/blob/master/wireframes/wireframes001.JPG)
 
 ![Wireframe of admin pages and fandom/user list view](https://github.com/mgettytehan/ga-project-fandom/blob/master/wireframes/wireframes002.JPG)
+
+## ERD
+
+![Entity Relationship Diagram for database structure](https://github.com/mgettytehan/ga-project-fandom/blob/master/wireframes/erdiagram.png)
