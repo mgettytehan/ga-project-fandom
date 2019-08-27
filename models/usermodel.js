@@ -79,11 +79,8 @@ async function getFandomsInAndNotIn (userId) {
 }
 //delete relationships associated with user
 async function deleteUser(userId) {
-    await Promise.all(userInFandomApi.deleteDocs({userId}), userSiteApi.deleteDocs({userId})).catch(
-        err => {
-            console.log(err);
-            return;
-        }
+    await Promise.all([userInFandomApi.deleteDocs({userId}), userSiteApi.deleteDocs({userId})]).catch(
+        err => console.log(err)
     );
     return await userApi.deleteDoc(userId);
 }

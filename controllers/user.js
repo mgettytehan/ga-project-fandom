@@ -44,7 +44,7 @@ userRouter.route('/:userId')
     );
   })
   .delete( (req, res) => {
-    userApi.deleteDoc(req.params.userId).then(
+    userModelApi.deleteUser(req.params.userId).then(
       () => res.redirect('/')
     ).catch(
       () => res.sendStatus(400)

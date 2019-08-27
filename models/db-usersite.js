@@ -8,7 +8,6 @@ const userSiteApi = dbFactory.dbModel('UserSite', {
 });
 
 userSiteApi.deleteDocs = function(criteria) {
-  console.log(this);
   return this.collection.deleteMany(criteria);
 };
 

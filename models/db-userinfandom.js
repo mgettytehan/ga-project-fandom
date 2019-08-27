@@ -7,7 +7,6 @@ const userInFandomApi = dbFactory.dbModel('UserInFandom', {
 });
 
 userInFandomApi.deleteDocs = function(criteria) {
-  console.log(this);
   return this.collection.deleteMany(criteria);
 };
 
