@@ -51,7 +51,7 @@ fandomRouter.route('/:fandomId')
     );
   })
   .delete( (req, res) => {
-    fandomApi.deleteDoc(req.params.fandomId).then(
+    userInFandomApi.deleteFandom(req.params.fandomId).then(
       () => res.redirect('/fandoms/admin')
     ).catch(
       () => res.sendStatus(400)

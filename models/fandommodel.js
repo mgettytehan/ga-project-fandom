@@ -41,7 +41,13 @@ async function getMediaTypeByFandom (fandom) {
     return mediaTypeApi.getById(fandom.mediaTypeId);
 }
 
+async function deleteFandom(fandomId) {
+    await userInFandomApi.deleteDocs({ fandomId });
+    return await fandomApi.deleteDoc(fandomId);
+}
+
 module.exports = {
+    deleteFandom,
     getAllFandomData,
     getAllFandomsSorted,
     getFandomAndMediaTypes,
