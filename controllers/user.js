@@ -27,7 +27,7 @@ userRouter.get('/signup', (req, res) => {
 
 userRouter.route('/:userId')
   .get( (req, res) => {
-    userModelApi.getUserAndFandoms(req.params.userId).then(
+    userModelApi.getAllUserData(req.params.userId).then(
       userAndFandoms => {
         userAndFandoms.title = userAndFandoms.user.username;
         res.render('./user/userProfile.hbs', userAndFandoms);
