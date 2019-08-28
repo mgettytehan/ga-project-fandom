@@ -12,8 +12,11 @@ Due to the time restraints of the project, the web application at the time of wr
 ### Deployment link
 https://fierce-garden-12875.herokuapp.com/
 
-## Technologies
+## Technologies and Libraries
 
+- HTML, CSS, Javascript
+
+- Materialize
 - Handlebars
 - Node.js
 - Express.js
