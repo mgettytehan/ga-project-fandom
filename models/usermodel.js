@@ -47,9 +47,14 @@ function getIdsFromForm(formData) {
 
 //expect array of fandom Ids to add and to remove
 async function addFandomsToUser (userId, formData) {
-    const newFandoms = getIdsFromForm(formData).map(
-        fandomId => { return { fandomId, userId } }
-    );
+    let newFandoms;
+    try {
+        newFandoms = getIdsFromForm(formData).map(
+            fandomId => { return { fandomId, userId } }
+        );
+    } catch (err) {
+        newFandoms = [];
+    }
     return await userInFandomApi.addDocs(newFandoms);
 }
 

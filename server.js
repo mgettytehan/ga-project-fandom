@@ -9,6 +9,7 @@ const { userRouter } = require('./controllers/user.js');
 const { fandomRouter } = require('./controllers/fandom.js');
 const { mediaTypeRouter } = require('./controllers/mediatype.js')
 const { mainRouter } = require('./controllers/main.js');
+const { siteLinkRouter } = require('./controllers/sitelink.js')
 
 // middleware
 app.use(express.urlencoded({extended: true}));
@@ -21,7 +22,8 @@ app.set('view engine', 'hbs');
 // set routes
 app.use('/users', userRouter);
 app.use('/fandoms', fandomRouter);
-app.use('/mediatypes', mediaTypeRouter)
+app.use('/mediatypes', mediaTypeRouter);
+app.user('/sitelinks', siteLinkRouter);
 app.use('/', mainRouter);
 
 // set port
