@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand|Roboto&display=swap');
+body{
+    font-family: 'Roboto', sans-serif;
+}
+h1, h2, h3, h4, h5, h6, .brand-logo {
+    font-family: 'Quicksand', serif;
+}
 .main-container {
     min-height: 85vh;
 }
