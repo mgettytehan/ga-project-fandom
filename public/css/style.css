@@ -1,3 +1,15 @@
 .main-container {
-    min-height: 80vh;
+    min-height: 85vh;
+}
+a {
+    color: #4e342e;
+}
+.btn, .btn-small, .btn-large {
+    background-color: #ef8600;
+}
+.btn:hover, .btn-small:hover, .btn-large:hover {
+    background-color: #ffab40;
+}
+.collection a.collection-item {
+    color: #4e342e;
 }

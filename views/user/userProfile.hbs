@@ -8,14 +8,13 @@
 {{user.username}} has no bio.
 {{/if}}
 </p>
-<p><a href="/users/{{user._id}}/edit" class="btn-small">Edit</a></p>
 <h4>Links</h4>
 {{#if links.length}}
 <p><a href="{{links.link}}">{{links.siteName}}</a></p>
 {{else}}
 <p>{{user.username}} has no links.</p>
 {{/if}}
-<p></p>
+<p><a href="/users/{{user._id}}/edit" class="btn-small">Edit</a></p>
 </section>
 <section class="section">
     <h4>Fandoms</h4>
