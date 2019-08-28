@@ -23,7 +23,7 @@ app.set('view engine', 'hbs');
 app.use('/users', userRouter);
 app.use('/fandoms', fandomRouter);
 app.use('/mediatypes', mediaTypeRouter);
-app.user('/sitelinks', siteLinkRouter);
+app.use('/sitelinks', siteLinkRouter);
 app.use('/', mainRouter);
 
 // set port
