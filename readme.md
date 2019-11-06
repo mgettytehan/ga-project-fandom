@@ -15,7 +15,7 @@ https://fierce-garden-12875.herokuapp.com/
 ## Technologies and Libraries
 
 - HTML, CSS, Javascript
-
+- SASS
 - Materialize
 - Handlebars
 - Node.js
@@ -24,12 +24,8 @@ https://fierce-garden-12875.herokuapp.com/
 - MongoDB
 - Heroku
 
-## Wireframes
+## Wireframes and ERD
 
-![Wireframe of main page, user page and fandom page](https://github.com/mgettytehan/ga-project-fandom/blob/master/wireframes/wireframes001.JPG)
-
-![Wireframe of admin pages and fandom/user list view](https://github.com/mgettytehan/ga-project-fandom/blob/master/wireframes/wireframes002.JPG)
-
-## ERD
+[Preliminary wireframes](https://github.com/mgettytehan/ga-project-fandom/tree/master/wireframes) can be found in folder.
 
 ![Entity Relationship Diagram for database structure](https://github.com/mgettytehan/ga-project-fandom/blob/master/wireframes/erdiagram.png)
