@@ -14,9 +14,13 @@ body {
   background-color: #FFFEFC;
 }
 
-main {
+.main-container {
   // flex: 1 0 auto;
   min-height: 85vh;
+}
+
+.brand-logo {
+  padding: 10px;
 }
 
 button,
@@ -39,9 +43,8 @@ ul {
 }
 
 a {
-	color: $link-color;
+	color: #000080;
 	text-decoration: none;
-
   // Gets rid of tap active state
   -webkit-tap-highlight-color: transparent;
 }
